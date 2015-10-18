@@ -24,5 +24,6 @@ _testmain.go
 *.prof
 .DS_Store
 .tmp
+gin-bin
 
 bin/
