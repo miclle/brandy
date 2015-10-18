@@ -5,15 +5,29 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
-var Dir string
-var Port int
+type Conf struct {
+	Dir  string
+	Port int
+}
 
-func Init() {
-	flag.StringVar(&Dir, "dir", "", "dir of brandy")
-	flag.IntVar(&Port, "port", 3000, "port of brandy")
-	flag.Parse()
+var Config Conf
+
+func InitArgs() {
+
+	fs := flag.NewFlagSetWithEnvPrefix(os.Args[0], "", 0)
+
+	fs.StringVar(&Config.Dir, "dir", "", "dir of brandy")
+	fs.IntVar(&Config.Port, "port", 3000, "port of brandy")
+
+	for i, arg := range os.Args {
+		if strings.HasPrefix(arg, "-") {
+			fs.Parse(os.Args[i:])
+			break
+		}
+	}
 
 	// Get the directory of the currently
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
@@ -21,7 +35,9 @@ func Init() {
 		log.Fatal(err)
 	}
 
-	if Dir == "" {
-		Dir = dir
+	if Config.Dir == "" {
+		Config.Dir = dir
 	}
+
+	log.Println("Config.Dir", Config.Dir)
 }
