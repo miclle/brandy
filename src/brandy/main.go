@@ -45,8 +45,8 @@ func main() {
 		}
 	}
 
-	log.Println("[brandy] listening on port", conf.Port)
-	log.Println("[brandy] Serving files from", conf.Dir)
+	log.Printf("Listening on localhost:%d, CTRL+C to stop\n", conf.Port)
+	log.Println("Serving files from", conf.Dir)
 
 	addr := fmt.Sprintf(":%d", conf.Port)
 	handler := http.FileServer(http.Dir(conf.Dir))
