@@ -1,13 +1,19 @@
 # brandy
 
-## brandy
+## Usage:
+  brandy new APP_PATH
 
-## args
+## Commands:
+
+### brandy
 
 ### help, h
 
 Display help text
 
+### new, n
+
+Create
 
 ### clean, c
 
@@ -22,3 +28,14 @@ Verbose mode. A lot more information output.
 ### version, V
 
 Print the brandy version. Combine with verbose for more info.
+
+
+## Global Options:
+
+### -port, --port
+
+Specify a port to use
+
+
+## Example:
+  brandy new ~/code/app
