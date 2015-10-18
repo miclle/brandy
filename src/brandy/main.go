@@ -1,6 +1,7 @@
 package main
 
 import (
+	"brandy/command"
 	"brandy/conf"
 	"fmt"
 	"log"
@@ -11,7 +12,7 @@ import (
 
 func main() {
 
-	conf.Init()
+	conf.InitArgs()
 
 	var str string
 
@@ -20,10 +21,11 @@ func main() {
 
 		switch str {
 		case "help", "h":
-			log.Println("help task")
+			command.Help()
 
 		case "new", "n":
-			log.Println("new task")
+			command.NewApp()
+			os.Exit(0)
 
 		case "clean", "c":
 			log.Println("clean task")
@@ -45,10 +47,10 @@ func main() {
 		}
 	}
 
-	log.Printf("Listening on localhost:%d, CTRL+C to stop\n", conf.Port)
-	log.Println("Serving files from", conf.Dir)
+	log.Printf("Listening on localhost:%d, CTRL+C to stop\n", conf.Config.Port)
+	log.Println("Serving files from", conf.Config.Dir)
 
-	addr := fmt.Sprintf(":%d", conf.Port)
-	handler := http.FileServer(http.Dir(conf.Dir))
+	addr := fmt.Sprintf(":%d", conf.Config.Port)
+	handler := http.FileServer(http.Dir(conf.Config.Dir))
 	panic(http.ListenAndServe(addr, handler))
 }
