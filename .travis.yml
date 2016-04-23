@@ -10,7 +10,5 @@ install:
   
 script:
   - cd $TRAVIS_BUILD_DIR
-  - export GOPATH=$GOPATH:`pwd`
-  - export PATH=$PATH:`pwd`/bin
   - make
   - make test

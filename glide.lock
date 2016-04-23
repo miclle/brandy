@@ -1,0 +1,11 @@
+hash: e8016cc549b873e70c76a727051934233aba8ee8a1b17a5e84056e624dc250eb
+updated: 2016-04-24T01:53:07.324612978+08:00
+imports:
+- name: github.com/miclle/brandy
+  version: d71bc7bff5f3e18bcbceaa83c47b30821cb858f6
+  subpackages:
+  - command
+  - conf
+- name: github.com/namsral/flag
+  version: 881a43080604bcf99ab1118a814d1cb2c268fc36
+devImports: []

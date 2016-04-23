@@ -1,6 +1,0 @@
-hash: 46add02109d0ec876603ce16f17244b8d4ac273fa4701f8ab4840de1bc95e791
-updated: 2016-04-23T21:08:11.516496639+08:00
-imports:
-- name: github.com/namsral/flag
-  version: 881a43080604bcf99ab1118a814d1cb2c268fc36
-devImports: []
