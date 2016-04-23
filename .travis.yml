@@ -7,5 +7,7 @@ sudo: false
 
 script:
   - cd $TRAVIS_BUILD_DIR
+  - export GOPATH=$GOPATH:$HOME/gopath/src/github.com/miclle/brandy
+  - export PATH=$PATH:$HOME/gopath/src/github.com/miclle/brandy/bin
   - make
   - make test
