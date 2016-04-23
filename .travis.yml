@@ -5,8 +5,10 @@ go:
 
 sudo: false
 
+install:
+  - go get github.com/Masterminds/glide
+  
 script:
-  - go get -u github.com/Masterminds/glide
   - cd $TRAVIS_BUILD_DIR
   - make
   - make test
