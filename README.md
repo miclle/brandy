@@ -1,5 +1,7 @@
 # brandy
 
+[![Build Status](https://travis-ci.org/miclle/brandy.svg?branch=master)](https://travis-ci.org/miclle/brandy)
+
 ## Usage:
   brandy new APP_PATH
 
