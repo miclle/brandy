@@ -1,20 +1,24 @@
 package conf
 
 import (
-	"github.com/namsral/flag"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/namsral/flag"
 )
 
+// Conf model
 type Conf struct {
 	Dir  string
 	Port int
 }
 
+// Config globle variable
 var Config Conf
 
+// InitArgs func
 func InitArgs() {
 
 	fs := flag.NewFlagSetWithEnvPrefix(os.Args[0], "", 0)
