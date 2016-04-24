@@ -37,6 +37,8 @@ func main() {
 	app.Name = "brandy"
 	app.Usage = usage
 	app.Version = version
+	app.Author = "Miclle Zheng"
+	app.Email = "miclle.zheng@gmail.com"
 
 	app.CommandNotFound = func(c *cli.Context, command string) {
 		logger.ExitCode(99)
