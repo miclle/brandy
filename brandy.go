@@ -1,57 +1,82 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
 	"os"
 
-	"github.com/miclle/brandy/command"
-	"github.com/miclle/brandy/conf"
+	"github.com/miclle/brandy/action"
+
+	"github.com/codegangsta/cli"
 	// "gopkg.in/fsnotify.v1"
+
+	"github.com/miclle/brandy/logger"
 )
+
+var version = "0.0.1-dev"
+
+const usage = `Full stack build system.
+
+Usage: brandy COMMAND [ARGS]
+
+The most common brandy commands are:
+ generate    Generate new code (short-cut alias: "g")
+ server      Start the brandy server (short-cut alias: "s")
+ new         Create a new brandy application. "brandy new my_app" creates a
+             new application called MyApp in "./my_app"
+
+In addition to those, there are:
+ destroy      Undo code generated with "generate" (short-cut alias: "d")
+
+All commands can be run with -h (or --help) for more information.
+
+More info https://github.com/miclle/brandy
+`
 
 func main() {
 
-	conf.InitArgs()
+	app := cli.NewApp()
+	app.Name = "brandy"
+	app.Usage = usage
+	app.Version = version
 
-	var str string
-
-	if len(os.Args) > 1 {
-		str = os.Args[1]
-
-		switch str {
-		case "help", "h":
-			command.Help()
-
-		case "new", "n":
-			command.NewApp()
-			os.Exit(0)
-
-		case "clean", "c":
-			log.Println("clean task")
-
-		case "build", "b":
-			log.Println("build task")
-
-		case "server", "s":
-			log.Println("server task")
-
-		case "verbose", "v":
-			log.Println("verbose task")
-
-		case "version", "V":
-			log.Println("version task")
-
-		default:
-			log.Println("default task")
-		}
+	app.CommandNotFound = func(c *cli.Context, command string) {
+		logger.ExitCode(99)
+		logger.Die("Command %s does not exist.", command)
 	}
 
-	log.Printf("Listening on localhost:%d, CTRL+C to stop\n", conf.Config.Port)
-	log.Println("Serving files from", conf.Config.Dir)
+	app.Before = startup
 
-	addr := fmt.Sprintf(":%d", conf.Config.Port)
-	handler := http.FileServer(http.Dir(conf.Config.Dir))
-	panic(http.ListenAndServe(addr, handler))
+	app.Commands = commands()
+
+	if err := app.Run(os.Args); err != nil {
+		logger.Err(err.Error())
+		os.Exit(1)
+	}
+
+	// If there was a Error message exit non-zero.
+	if logger.HasErrored() {
+		m := logger.Color(logger.Red, "An Error has occurred")
+		logger.Msg(m)
+		os.Exit(2)
+	}
+
+	// addr := fmt.Sprintf(":%d", conf.Config.Port)
+	// handler := http.FileServer(http.Dir(conf.Config.Dir))
+	// panic(http.ListenAndServe(addr, handler))
+}
+
+func startup(c *cli.Context) error {
+	// TODO
+	return nil
+}
+
+func commands() []cli.Command {
+	return []cli.Command{
+		{
+			Name:  "about",
+			Usage: "Learn about Brandy",
+			Action: func(c *cli.Context) {
+				action.About()
+			},
+		},
+	}
 }
