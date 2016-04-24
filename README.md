@@ -1,13 +1,13 @@
-# lisa
+# brandy
 
-[![Build Status](https://travis-ci.org/miclle/lisa.svg?branch=master)](https://travis-ci.org/miclle/lisa)
+[![Build Status](https://travis-ci.org/miclle/brandy.svg?branch=master)](https://travis-ci.org/miclle/brandy)
 
 ## Usage:
-  lisa new APP_PATH
+  brandy new APP_PATH
 
 ## Commands:
 
-### lisa
+### brandy
 
 ### help, h
 
@@ -31,4 +31,4 @@ Specify a port to use
 
 
 ## Example:
-  lisa new ~/code/app
+  brandy new ~/code/app

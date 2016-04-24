@@ -1,24 +1,24 @@
-LISA_GO_EXECUTABLE ?= go
+BRANDY_GO_EXECUTABLE ?= go
 VERSION := $(shell git describe --tags)
 DIST_DIRS := find * -type d -exec
 
 build:
-	${LISA_GO_EXECUTABLE} build -o lisa -ldflags "-X main.version=${VERSION}" lisa.go
+	${BRANDY_GO_EXECUTABLE} build -o brandy -ldflags "-X main.version=${VERSION}" brandy.go
 
 install: build
 	install -d ${DESTDIR}/usr/local/bin/
-	install -m 755 ./lisa ${DESTDIR}/usr/local/bin/lisa
+	install -m 755 ./brandy ${DESTDIR}/usr/local/bin/brandy
 
 test:
-	${LISA_GO_EXECUTABLE} test . ./action ./logger
+	${BRANDY_GO_EXECUTABLE} test . ./action ./logger
 
 clean:
-	rm -f ./lisa.test
-	rm -f ./lisa
+	rm -f ./brandy.test
+	rm -f ./brandy
 	rm -rf ./dist
 
 bootstrap-dist:
-	${LISA_GO_EXECUTABLE} get -u github.com/mitchellh/gox
+	${BRANDY_GO_EXECUTABLE} get -u github.com/mitchellh/gox
 
 build-all:
 	gox -verbose \
@@ -31,8 +31,8 @@ dist: build-all
 	cd dist && \
 	$(DIST_DIRS) cp ../LICENSE {} \; && \
 	$(DIST_DIRS) cp ../README.md {} \; && \
-	$(DIST_DIRS) tar -zcf lisa-${VERSION}-{}.tar.gz {} \; && \
-	$(DIST_DIRS) zip -r lisa-${VERSION}-{}.zip {} \; && \
+	$(DIST_DIRS) tar -zcf brandy-${VERSION}-{}.tar.gz {} \; && \
+	$(DIST_DIRS) zip -r brandy-${VERSION}-{}.zip {} \; && \
 	cd ..
 
 

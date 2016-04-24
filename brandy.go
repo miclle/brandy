@@ -3,24 +3,24 @@ package main
 import (
 	"os"
 
-	"github.com/miclle/lisa/action"
+	"github.com/miclle/brandy/action"
 
 	"github.com/codegangsta/cli"
 	// "gopkg.in/fsnotify.v1"
 
-	"github.com/miclle/lisa/logger"
+	"github.com/miclle/brandy/logger"
 )
 
 var version = "0.0.1-dev"
 
 const usage = `Full stack build system.
 
-Usage: lisa COMMAND [ARGS]
+Usage: brandy COMMAND [ARGS]
 
-The most common lisa commands are:
+The most common brandy commands are:
  generate    Generate new code (short-cut alias: "g")
- server      Start the lisa server (short-cut alias: "s")
- new         Create a new lisa application. "lisa new my_app" creates a
+ server      Start the brandy server (short-cut alias: "s")
+ new         Create a new brandy application. "brandy new my_app" creates a
              new application called MyApp in "./my_app"
 
 In addition to those, there are:
@@ -28,13 +28,13 @@ In addition to those, there are:
 
 All commands can be run with -h (or --help) for more information.
 
-More info https://github.com/miclle/lisa
+More info https://github.com/miclle/brandy
 `
 
 func main() {
 
 	app := cli.NewApp()
-	app.Name = "lisa"
+	app.Name = "brandy"
 	app.Usage = usage
 	app.Version = version
 
@@ -73,7 +73,7 @@ func commands() []cli.Command {
 	return []cli.Command{
 		{
 			Name:  "about",
-			Usage: "Learn about lisa",
+			Usage: "Learn about brandy",
 			Action: func(c *cli.Context) {
 				action.About()
 			},

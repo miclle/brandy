@@ -1,5 +1,5 @@
-package: github.com/miclle/lisa
-homepage: http://lisa.miclle.com
+package: github.com/miclle/brandy
+homepage: http://brandy.miclle.com
 license: MIT
 owners:
 - name: Miclle Zheng
