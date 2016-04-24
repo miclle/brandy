@@ -10,7 +10,7 @@ install: build
 	install -m 755 ./brandy ${DESTDIR}/usr/local/bin/brandy
 
 test:
-	${BRANDY_GO_EXECUTABLE} test . ./command ./conf
+	${BRANDY_GO_EXECUTABLE} test . ./action ./logger
 
 clean:
 	rm -f ./brandy.test
