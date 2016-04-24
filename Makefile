@@ -1,24 +1,24 @@
-BLANDY_GO_EXECUTABLE ?= go
+BRANDY_GO_EXECUTABLE ?= go
 VERSION := $(shell git describe --tags)
 DIST_DIRS := find * -type d -exec
 
 build:
-	${BLANDY_GO_EXECUTABLE} build -o blandy -ldflags "-X main.version=${VERSION}" main.go
+	${BRANDY_GO_EXECUTABLE} build -o brandy -ldflags "-X main.version=${VERSION}" brandy.go
 
 install: build
 	install -d ${DESTDIR}/usr/local/bin/
-	install -m 755 ./blandy ${DESTDIR}/usr/local/bin/blandy
+	install -m 755 ./brandy ${DESTDIR}/usr/local/bin/brandy
 
 test:
-	${BLANDY_GO_EXECUTABLE} test . ./command ./conf
+	${BRANDY_GO_EXECUTABLE} test . ./command ./conf
 
 clean:
-	rm -f ./blandy.test
-	rm -f ./blandy
+	rm -f ./brandy.test
+	rm -f ./brandy
 	rm -rf ./dist
 
 bootstrap-dist:
-	${BLANDY_GO_EXECUTABLE} get -u github.com/mitchellh/gox
+	${BRANDY_GO_EXECUTABLE} get -u github.com/mitchellh/gox
 
 build-all:
 	gox -verbose \
@@ -31,8 +31,8 @@ dist: build-all
 	cd dist && \
 	$(DIST_DIRS) cp ../LICENSE {} \; && \
 	$(DIST_DIRS) cp ../README.md {} \; && \
-	$(DIST_DIRS) tar -zcf blandy-${VERSION}-{}.tar.gz {} \; && \
-	$(DIST_DIRS) zip -r blandy-${VERSION}-{}.zip {} \; && \
+	$(DIST_DIRS) tar -zcf brandy-${VERSION}-{}.tar.gz {} \; && \
+	$(DIST_DIRS) zip -r brandy-${VERSION}-{}.zip {} \; && \
 	cd ..
 
 
