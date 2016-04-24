@@ -1,16 +1,10 @@
-package command
+package action
 
-import (
-	"fmt"
-	"os"
-)
+import "github.com/miclle/brandy/logger"
 
-func Help() {
-	fmt.Println(help)
-	os.Exit(0)
-}
+const aboutMessage = `
+Full stack build system.
 
-var help = `
 Usage: brandy COMMAND [ARGS]
 
 The most common brandy commands are:
@@ -26,3 +20,8 @@ All commands can be run with -h (or --help) for more information.
 
 More info https://github.com/miclle/brandy
 `
+
+// About prints information about Brandy.
+func About() {
+	logger.Puts(aboutMessage)
+}
