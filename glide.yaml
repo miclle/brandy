@@ -8,4 +8,3 @@ owners:
 import:
 - package: gopkg.in/yaml.v2
 - package: github.com/codegangsta/cli
-- package: github.com/namsral/flag
