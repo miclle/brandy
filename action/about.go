@@ -1,16 +1,16 @@
 package action
 
-import "github.com/miclle/brandy/logger"
+import "github.com/miclle/lisa/logger"
 
 const aboutMessage = `
 Full stack build system.
 
-Usage: brandy COMMAND [ARGS]
+Usage: lisa COMMAND [ARGS]
 
-The most common brandy commands are:
+The most common lisa commands are:
  generate    Generate new code (short-cut alias: "g")
- server      Start the brandy server (short-cut alias: "s")
- new         Create a new brandy application. "brandy new my_app" creates a
+ server      Start the lisa server (short-cut alias: "s")
+ new         Create a new lisa application. "lisa new my_app" creates a
              new application called MyApp in "./my_app"
 
 In addition to those, there are:
@@ -18,10 +18,10 @@ In addition to those, there are:
 
 All commands can be run with -h (or --help) for more information.
 
-More info https://github.com/miclle/brandy
+More info https://github.com/miclle/lisa
 `
 
-// About prints information about Brandy.
+// About prints information about lisa.
 func About() {
 	logger.Puts(aboutMessage)
 }

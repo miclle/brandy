@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/miclle/brandy/logger"
+	"github.com/miclle/lisa/logger"
 )
 
 func TestAbout(t *testing.T) {
