@@ -80,5 +80,27 @@ func commands() []cli.Command {
 				action.About()
 			},
 		},
+		{
+			Name:        "server",
+			Usage:       "Start a static file server",
+			Description: "Start the brandy server",
+			Action: func(c *cli.Context) {
+				// TODO
+			},
+		},
+		{
+			Name:  "build",
+			Usage: "Build the project",
+			Action: func(c *cli.Context) {
+				// TODO
+			},
+		},
+		{
+			Name:  "init",
+			Usage: "Initialize the configuration",
+			Action: func(c *cli.Context) {
+				// TODO
+			},
+		},
 	}
 }
