@@ -3,25 +3,23 @@
 [![Build Status](https://travis-ci.org/miclle/brandy.svg?branch=master)](https://travis-ci.org/miclle/brandy)
 
 ## Usage:
-  brandy new APP_PATH
+  brandy init APP_PATH
 
 ## Commands:
-
-### brandy
 
 ### help, h
 
 Display help text
 
-### new, n
+### init
 
 Create
 
-### clean, c
+### clean
 
-### build, b
+### build
 
-### server, s
+### server
 
 ## Global Options:
 
