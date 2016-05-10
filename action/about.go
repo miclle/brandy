@@ -1,6 +1,10 @@
 package action
 
-import "github.com/miclle/brandy/logger"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
 const aboutMessage = `
 Full stack build system.
@@ -21,7 +25,9 @@ All commands can be run with -h (or --help) for more information.
 More info https://github.com/miclle/brandy
 `
 
+var stdout io.Writer = os.Stdout
+
 // About prints information about brandy.
 func About() {
-	logger.Puts(aboutMessage)
+	fmt.Fprint(stdout, aboutMessage)
 }

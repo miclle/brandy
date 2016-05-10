@@ -4,18 +4,12 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/miclle/brandy/logger"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAbout(t *testing.T) {
-	var buf bytes.Buffer
-	old := logger.Default.Stdout
-	logger.Default.Stdout = &buf
+	assert := assert.New(t)
+	stdout = &bytes.Buffer{}
 	About()
-
-	if buf.Len() < len(aboutMessage) {
-		t.Errorf("expected this to match aboutMessage: %q", buf.String())
-	}
-
-	logger.Default.Stdout = old
+	assert.Equal(stdout, aboutMessage, "The two words should be the same.")
 }
