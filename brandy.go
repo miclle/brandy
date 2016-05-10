@@ -99,7 +99,7 @@ func commands() []cli.Command {
 			Name:  "init",
 			Usage: "Initialize the configuration",
 			Action: func(c *cli.Context) {
-				// TODO
+				action.Init()
 			},
 		},
 	}
