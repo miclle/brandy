@@ -12,6 +12,7 @@ sudo: false
 install:
   - cd $TRAVIS_BUILD_DIR
   - go get
+  - go get github.com/stretchr/testify/assert
 
 script:
   - cd $TRAVIS_BUILD_DIR
