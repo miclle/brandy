@@ -5,7 +5,7 @@ import (
 
 	"github.com/codegangsta/cli"
 	"github.com/miclle/brandy/action"
-	"github.com/op/go-logging"
+	"github.com/miclle/brandy/logger"
 	// "gopkg.in/fsnotify.v1"
 	// "gopkg.in/yaml.v2"
 )
@@ -30,19 +30,6 @@ All commands can be run with -h (or --help) for more information.
 More info https://github.com/miclle/brandy
 `
 
-var log = logging.MustGetLogger("brandy")
-
-var format = logging.MustStringFormatter(`%{color}%{time:15:04:05.000} %{shortfunc} ▶ %{level:.4s} %{id:03x}%{color:reset} %{message}`)
-
-func init() {
-	backend1 := logging.NewLogBackend(os.Stderr, "", 0)
-	backend2 := logging.NewLogBackend(os.Stderr, "", 0)
-	backend2Formatter := logging.NewBackendFormatter(backend2, format)
-	backend1Leveled := logging.AddModuleLevel(backend1)
-	backend1Leveled.SetLevel(logging.ERROR, "")
-	logging.SetBackend(backend1Leveled, backend2Formatter)
-}
-
 func main() {
 
 	app := cli.NewApp()
@@ -53,7 +40,7 @@ func main() {
 	app.Email = "miclle.zheng@gmail.com"
 
 	app.CommandNotFound = func(c *cli.Context, command string) {
-		log.Errorf("Command %s does not exist.", command)
+		logger.Log.Errorf("Command %s does not exist.", command)
 	}
 
 	app.Before = startup
@@ -61,7 +48,7 @@ func main() {
 	app.Commands = commands()
 
 	if err := app.Run(os.Args); err != nil {
-		log.Error(err.Error())
+		logger.Log.Error(err.Error())
 		os.Exit(1)
 	}
 }
