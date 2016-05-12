@@ -1,26 +1,25 @@
 package action
 
-import "io/ioutil"
+import (
+	"io/ioutil"
 
-var template = `
-# Be sure to restart brandy when you modify this file.
+	"gopkg.in/yaml.v2"
 
-default: &default
-  app: src
-  dist: dist
-  port: 8080
-  # proxy: 
-  # target: 
+	"github.com/miclle/brandy/logger"
+)
 
-production:
-  <<: *default
+// DefaultConfig is default configuration
+type DefaultConfig struct {
+	App  string `yaml:"app"`
+	Dist string `yaml:"dist"`
+}
 
-development:
-  <<: *default
-
-test:
-  <<: *default
-`
+// Config is brandy configuration
+type Config struct {
+	Development DefaultConfig `yaml:"production"`
+	Production  DefaultConfig `yaml:"development"`
+	Test        DefaultConfig `yaml:"test"`
+}
 
 // Init the configuration
 func Init() {
@@ -29,4 +28,22 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// ReadConfig read the configuration file
+func ReadConfig() (*Config, error) {
+	data, err := ioutil.ReadFile("brandy.yml")
+	if err != nil {
+		logger.Log.Error(err)
+		return nil, nil
+	}
+
+	config := &Config{}
+
+	err = yaml.Unmarshal([]byte(data), config)
+	if err != nil {
+		logger.Log.Error(err)
+	}
+
+	return config, nil
 }

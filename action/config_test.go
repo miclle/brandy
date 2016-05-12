@@ -21,3 +21,20 @@ func TestInit(t *testing.T) {
 	assert.NotNil(fi)
 	assert.Equal(fi.Mode(), os.FileMode(0644), "The brandy.yml file model should be 0644 `-rw-r--r--`")
 }
+
+func TestReadConfig(t *testing.T) {
+	assert := assert.New(t)
+	config, err := ReadConfig()
+	assert.Nil(err)
+	assert.NotNil(config)
+
+	for _, c := range []DefaultConfig{
+		config.Development,
+		config.Production,
+		config.Test,
+	} {
+		assert.NotNil(c)
+		assert.Equal(c.App, "src")
+		assert.Equal(c.Dist, "dist")
+	}
+}
