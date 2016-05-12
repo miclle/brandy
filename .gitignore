@@ -27,3 +27,5 @@ _testmain.go
 
 brandy
 brandy.yml
+
+coverage.out

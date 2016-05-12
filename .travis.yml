@@ -9,18 +9,26 @@ go:
 
 sudo: false
 
+  
+before_install:
+  - go get github.com/stretchr/testify/assert
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/modocache/gover
+  - go get github.com/mattn/goveralls
+  
 install:
   - cd $TRAVIS_BUILD_DIR
   - go get
-  - go get github.com/stretchr/testify/assert
 
 script:
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/mattn/goveralls
-  - go test -v -covermode=count -coverprofile=coverage.out
   - cd $TRAVIS_BUILD_DIR
   - make
-  - make test
 
 after_success:
-  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken Zj9oqAkLWc0WUXcuepeKja8K0Frrcjj7V
+  - go test -coverprofile=action.coverprofile ./action
+  - go test -coverprofile=logger.coverprofile ./logger
+  - go test -coverprofile=main.coverprofile
+  
+  - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/gover
+  - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/goveralls -coverprofile=gover.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
