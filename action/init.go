@@ -24,8 +24,8 @@ test:
 
 // Init the configuration
 func Init() {
-	d1 := []byte(template)
-	err := ioutil.WriteFile("brandy.yml", d1, 0644)
+	data := []byte(template)
+	err := ioutil.WriteFile("brandy.yml", data, 0644)
 	if err != nil {
 		panic(err)
 	}
