@@ -15,6 +15,12 @@ install:
   - go get github.com/stretchr/testify/assert
 
 script:
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
+  - go test -v -covermode=count -coverprofile=coverage.out
   - cd $TRAVIS_BUILD_DIR
   - make
   - make test
+
+after_success:
+  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken Zj9oqAkLWc0WUXcuepeKja8K0Frrcjj7V
