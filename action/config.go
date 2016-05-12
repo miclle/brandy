@@ -35,7 +35,7 @@ func ReadConfig() (*Config, error) {
 	data, err := ioutil.ReadFile("brandy.yml")
 	if err != nil {
 		logger.Log.Error(err)
-		return nil, nil
+		return nil, err
 	}
 
 	config := &Config{}
@@ -43,6 +43,7 @@ func ReadConfig() (*Config, error) {
 	err = yaml.Unmarshal([]byte(data), config)
 	if err != nil {
 		logger.Log.Error(err)
+		return nil, err
 	}
 
 	return config, nil

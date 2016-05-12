@@ -79,7 +79,7 @@ func commands() []cli.Command {
 			Name:  "build",
 			Usage: "Build the project",
 			Action: func(c *cli.Context) {
-				// TODO
+				action.Build()
 			},
 		},
 		{
