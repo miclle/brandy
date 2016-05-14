@@ -7,8 +7,8 @@ import (
 	"github.com/wellington/go-libsass"
 )
 
-// ScssToCSS is convert Sass to CSS func
-func ScssToCSS(src io.Reader, dst io.Writer) error {
+// SassToCSS is convert Sass to CSS func
+func SassToCSS(src io.Reader, dst io.Writer) error {
 
 	comp, err := libsass.New(dst, src)
 	if err != nil {
