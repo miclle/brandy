@@ -10,7 +10,7 @@ import (
 func TestScssToCSS(t *testing.T) {
 	assert := assert.New(t)
 
-	r, err := os.Open("scss.scss")
+	r, err := os.Open("../test/compiler.scss")
 
 	assert.Nil(err)
 	assert.NotNil(r)
