@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"errors"
 	"io"
+	"log"
 	"os"
+	"path/filepath"
 )
 
 // Merger func is the joining together of some files so that they become one.
@@ -14,18 +16,33 @@ func Merger(dist string, srcs ...string) error {
 		return errors.New("Source files must required")
 	}
 
-	_, err := os.Stat(dist)
+	dir := filepath.Dir(dist)
 
-	if os.IsNotExist(err) {
-		if err = os.MkdirAll(dist, os.FileMode(0644)); err != nil {
+	log.Print(dir)
+
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		if err = os.MkdirAll(dir, os.FileMode(0755)); err != nil {
+			log.Print(err.Error())
 			return err
 		}
 	}
 
-	f, err := os.OpenFile(dist, os.O_RDWR, os.FileMode(0644))
+	_, err := os.Stat(dist)
+
+	var f *os.File
 
 	if err != nil {
-		return err
+		if os.IsNotExist(err) {
+			if f, err = os.Create(dist); err != nil {
+				return err
+			}
+		} else {
+			return err
+		}
+	} else {
+		if f, err = os.OpenFile(dist, os.O_RDWR, os.FileMode(0644)); err != nil {
+			return err
+		}
 	}
 
 	w := bufio.NewWriter(f)
