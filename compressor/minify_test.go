@@ -10,13 +10,19 @@ import (
 
 func TestMinify(t *testing.T) {
 	assert := assert.New(t)
-	src := "../test/compiler.css"
-	dist := "../test/compiler.min.css"
+	src := "../test/test.css"
+	dist := "../.tmp/test.min.css"
+	tempPath := "../.tmp"
 
 	r, err := os.Open(src)
 	assert.Nil(err)
 	assert.NotNil(r)
 	assert.NotEmpty(r)
+
+	if _, err := os.Stat(tempPath); os.IsNotExist(err) {
+		err = os.Mkdir(tempPath, os.FileMode(0755))
+		assert.Nil(err)
+	}
 
 	f, err := os.Create(dist)
 	assert.Nil(err)
