@@ -3,7 +3,7 @@ package compressor
 import (
 	"bufio"
 	"errors"
-	"io/ioutil"
+	"io"
 	"os"
 )
 
@@ -11,7 +11,7 @@ import (
 func Merger(dist string, srcs ...string) error {
 
 	if len(srcs) <= 0 {
-		return errors.New("Source files must require")
+		return errors.New("Source files must required")
 	}
 
 	_, err := os.Stat(dist)
@@ -32,17 +32,25 @@ func Merger(dist string, srcs ...string) error {
 
 	for _, src := range srcs {
 		f, err := os.Open(src)
-		if err != nil {
-			return err
-		}
 
-		bytes, err := ioutil.ReadAll(f)
+		defer f.Close()
 
 		if err != nil {
 			return err
 		}
 
-		w.Write(bytes)
+		r := bufio.NewReader(f)
+
+		buffer := make([]byte, 1024)
+
+		for {
+			n, err := r.Read(buffer)
+			if err == io.EOF {
+				break
+			} else {
+				w.Write(buffer[:n])
+			}
+		}
 	}
 
 	return w.Flush()
