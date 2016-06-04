@@ -3,6 +3,7 @@ VERSION := $(shell git describe --tags)
 DIST_DIRS := find * -type d -exec
 
 build:
+	${BRANDY_GO_EXECUTABLE} get ./...
 	${BRANDY_GO_EXECUTABLE} build -o brandy -ldflags "-X main.version=${VERSION}" brandy.go
 
 install: build
